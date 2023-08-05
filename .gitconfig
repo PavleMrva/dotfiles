@@ -1,0 +1,7 @@
+[user]
+	email = pavle.mrvaljevic@igamingplatform.com
+	name = Pavle
+[credential]
+	helper = osxkeychain
+[url "git@bitbucket.org:autautdoo"]
+	insteadOf = https://bitbucket.org/autautdoo
