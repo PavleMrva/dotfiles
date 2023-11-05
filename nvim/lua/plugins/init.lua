@@ -1,7 +1,5 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-vim.opt.rtp:prepend(lazypath)
-
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     "git",
@@ -12,6 +10,8 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
+vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   {
@@ -41,42 +41,20 @@ local plugins = {
   },
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.2",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    branch = "0.1.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        cond = function()
+          return vim.fn.executable("make") == 1
+        end,
+      }
+    },
     config = function()
-      require("telescope").setup({
-        defaults = {
-          -- Default configuration for telescope goes here:
-          -- config_key = value,
-          mappings = {
-            i = {
-              ["<C-u>"] = false,
-              ["<C-d>"] = false,
-              ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble
-            },
-            n = { ["<C-t>"] = require("trouble.providers.telescope").open_with_trouble },
-          },
-        },
-        pickers = {
-          -- Default configuration for builtin pickers goes here:
-          -- picker_name = {
-          --   picker_config_key = value,
-          --   ...
-          -- }
-          -- Now the picker_config_key will be applied every time you call this
-          -- builtin picker
-        },
-        extensions = {
-          -- Your extension configuration goes here:
-          -- extension_name = {
-          --   extension_config_key = value,
-          -- }
-          -- please take a look at the readme of the extension you want to configure
-        },
-      })
-
       -- Enable telescope fzf native, if installed
-      pcall(require('telescope').load_extension, 'fzf')
+      -- pcall(require('telescope').load_extension, 'fzf')
 
       local telescope_builtin = require('telescope.builtin')
       vim.keymap.set('n', '<leader>?', telescope_builtin.oldfiles, { desc = '[?] Find recently opened files' })
@@ -89,18 +67,10 @@ local plugins = {
         })
       end, { desc = '[/] Fuzzily search in current buffer' })
 
+      vim.keymap.set('n', '<leader>fj', "<CMD>Telescope find_files hidden=true<CR>", { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ff', telescope_builtin.find_files, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = '[S]earch [H]elp' })
-    end,
-  },
-  {
-    "nvim-telescope/telescope-fzf-native.nvim",
-    -- NOTE: If you are having trouble with this installation,
-    --       refer to the README for telescope-fzf-native for more instructions.
-    build = "make",
-    cond = function()
-      return vim.fn.executable("make") == 1
     end,
   },
   {
@@ -114,6 +84,7 @@ local plugins = {
         "gofmt",
         "goimports_reviser",
         "golangci_lint",
+        "eslint_d",
         "spell",
         "mypy",
         "ruff",
@@ -126,9 +97,13 @@ local plugins = {
   {
     "LuaLS/lua-language-server",
     ft = "lua",
+    tag = "3.7.0",
   },
   {
     "sainnhe/gruvbox-material",
+  },
+  {
+    "jacoborus/tender.vim",
   },
   {
     'luisiacc/gruvbox-baby'
@@ -139,7 +114,14 @@ local plugins = {
   {
     "ayu-theme/ayu-vim",
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme(_G.theme)
+    end,
+  },
   {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate", -- this will ensure that your parsers are always up to date
@@ -167,7 +149,9 @@ local plugins = {
       { "<leader>ntt", ":NvimTreeToggle<CR>",         desc = "Toggle nvim-tree" },
     },
     config = function()
-      require("nvim-tree").setup()
+      require("nvim-tree").setup({
+        filters = { dotfiles = false }
+      })
     end
   },
   {
@@ -315,6 +299,12 @@ local plugins = {
         end,
       },
 
+      {
+        "windwp/nvim-ts-autotag",
+        config = function()
+          require('nvim-ts-autotag').setup()
+        end,
+      },
       -- autopairing of (){}[] etc
       {
         "windwp/nvim-autopairs",
@@ -394,6 +384,15 @@ local plugins = {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     }
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    config = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
+  {
+    "github/copilot.vim"
   }
 }
 

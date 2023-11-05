@@ -9,6 +9,8 @@ yabai -m config layout bsp
 
 yabai -m config window_placement second_child
 
+yabai -m rule --add app="Teams$" manage=off
+
 # padding
 yabai -m config top_padding 12
 yabai -m config bottom_padding 12

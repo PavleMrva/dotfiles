@@ -79,6 +79,9 @@ local servers = {
   intelephense = {
     filetypes = { "php" }
   },
+  terraformls = {
+    filetypes = {"tf", "tfvars"}
+  },
   -- rust_analyzer = {},
   tsserver = {
     completions = {

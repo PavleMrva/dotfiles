@@ -1,10 +1,12 @@
-_G.theme = "gruvbox-baby"
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+_G.theme = "catppuccin"
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+require("plugins.init")
+
 vim.g.go_def_mode = "guru"
-vim.g.go_addtags_transform = "camelcase"
+vim.g.go_addtags_transform = "snakecase"
 
 -- Enable telescope theme
 vim.g.gruvbox_baby_telescope_theme = 1
@@ -26,6 +28,13 @@ vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = "a"
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = "menuone,noselect"
+-- Enable automatic writing of all buffers when leaving or executing external commands
+vim.o.autowriteall = true
+
+vim.wo.relativenumber = true
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -49,18 +58,16 @@ vim.wo.signcolumn = "yes"
 vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
--- Set completeopt to have a better completion experience
-vim.o.completeopt = "menuone,noselect"
-
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- Enable automatic writing of all buffers when leaving or executing external commands
-vim.o.autowriteall = true
-
-vim.wo.relativenumber = true
-
-require("plugins.init")
 require("custom.configs.lspconfig")
 
-vim.cmd("colorscheme " .. _G.theme)
+vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
+vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
+vim.cmd([[autocmd BufRead,BufNewFile .terraformrc,terraform.rc set filetype=hcl]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
+
+vim.cmd([[let g:terraform_fmt_on_save=1]])
+vim.cmd([[let g:terraform_align=1]])

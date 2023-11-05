@@ -10,13 +10,14 @@ null_ls.setup({
     null_ls.builtins.formatting.black,
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports_reviser,
-    null_ls.builtins.formatting.golines,
     null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.formatting.spell,
     null_ls.builtins.diagnostics.mypy,
     null_ls.builtins.formatting.ruff,
     null_ls.builtins.diagnostics.gospel,
     null_ls.builtins.diagnostics.pycodestyle,
+    null_ls.builtins.formatting.terraform_fmt,
   },
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
