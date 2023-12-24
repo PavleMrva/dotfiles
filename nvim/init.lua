@@ -3,6 +3,8 @@ _G.theme = "catppuccin"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+
 require("plugins.init")
 
 vim.g.go_def_mode = "guru"

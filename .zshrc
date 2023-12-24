@@ -168,3 +168,5 @@ alias setns="kubectl config set-context --current --namespace"
 export sl="--show-labels"
 export do="--dry-run=client -oyaml"
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
