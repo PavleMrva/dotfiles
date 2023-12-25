@@ -1,4 +1,4 @@
-_G.theme = "catppuccin"
+_G.theme = "nordic"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -57,11 +57,13 @@ vim.o.smartcase = true
 vim.wo.signcolumn = "yes"
 
 -- Decrease update time
-vim.o.updatetime = 250
+vim.o.updatetime = 50
 vim.o.timeoutlen = 300
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.keymap.set("n", "<leader>p", '"_dP', { desc = "Paste without register" })
 
 require("custom.configs.lspconfig")
 

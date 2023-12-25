@@ -68,7 +68,6 @@ local plugins = {
   {
     "LuaLS/lua-language-server",
     ft = "lua",
-    tag = "3.7.0",
   },
   {
     "sainnhe/gruvbox-material",
@@ -84,14 +83,6 @@ local plugins = {
   },
   {
     "ayu-theme/ayu-vim",
-  },
-  {
-    "catppuccin/nvim",
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme(_G.theme)
-    end,
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -158,6 +149,7 @@ local plugins = {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
         dependencies = "rafamadriz/friendly-snippets",
+        run = "make install_jsregexp",
       },
       {
         "windwp/nvim-ts-autotag",
@@ -206,6 +198,7 @@ local plugins = {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
+    opts = {},
   },
   {
     "iamcco/markdown-preview.nvim",
@@ -264,6 +257,15 @@ local plugins = {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
+  },
+  {
+    "AlexvZyl/nordic.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("nordic").load()
+      vim.cmd.colorscheme(_G.theme)
+    end,
   },
 }
 

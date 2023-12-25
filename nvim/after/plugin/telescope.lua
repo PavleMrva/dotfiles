@@ -1,16 +1,26 @@
 -- Enable telescope fzf native, if installed
 -- pcall(require('telescope').load_extension, 'fzf')
-require("telescope").load_extension("harpoon")
+local telescope = require("telescope")
+
+telescope.load_extension("harpoon")
+telescope.setup({
+  defaults = {
+    file_ignore_patterns = {
+      "node_modules",
+    },
+  },
+})
 
 local telescope_builtin = require("telescope.builtin")
+
 vim.keymap.set("n", "<leader>?", telescope_builtin.oldfiles, { desc = "[?] Find recently opened files" })
 vim.keymap.set("n", "<leader><space>", telescope_builtin.buffers, { desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>/", function()
-	-- You can pass additional configuration to telescope to change theme, layout, etc.
-	telescope_builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-		winblend = 10,
-		previewer = false,
-	}))
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  telescope_builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+    winblend = 10,
+    previewer = false,
+  }))
 end, { desc = "[/] Fuzzily search in current buffer" })
 
 vim.keymap.set("n", "<leader>fj", "<CMD>Telescope find_files hidden=true<CR>", { desc = "[S]earch [F]iles" })
