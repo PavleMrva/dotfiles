@@ -14,10 +14,10 @@ cmp.setup({
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered({
-    -- 	winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-    -- }),
-    -- documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered({
+      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+    }),
+    documentation = cmp.config.window.bordered(),
   },
   formatting = {
     format = function(entry, vim_item)
@@ -30,6 +30,11 @@ cmp.setup({
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
         latex_symbols = "[LaTeX]",
+        vsnip = "[Snippet]",
+        tags = "[Tag]",
+        path = "[Path]",
+        orgmode = "[Org]",
+        ["vim-dadbod-completion"] = "[DB]",
       })[entry.source.name]
       return vim_item
     end,
@@ -78,3 +83,12 @@ cmp.setup.cmdline(":", {
     { name = "cmdline" },
   }),
 })
+
+-- Database completion
+vim.api.nvim_exec(
+  [[
+      autocmd FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+      autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+  ]],
+  false
+)

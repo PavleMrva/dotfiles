@@ -3,6 +3,7 @@
 local telescope = require("telescope")
 
 telescope.load_extension("harpoon")
+telescope.load_extension("live_grep_args")
 telescope.setup({
   defaults = {
     file_ignore_patterns = {
@@ -25,5 +26,10 @@ end, { desc = "[/] Fuzzily search in current buffer" })
 
 vim.keymap.set("n", "<leader>fj", "<CMD>Telescope find_files hidden=true<CR>", { desc = "[S]earch [F]iles" })
 vim.keymap.set("n", "<leader>ff", telescope_builtin.find_files, { desc = "[S]earch [F]iles" })
-vim.keymap.set("n", "<leader>fg", telescope_builtin.live_grep, { desc = "[S]earch by [G]rep" })
+vim.keymap.set(
+  "n",
+  "<leader>fg",
+  ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+  { desc = "[S]earch by [G]rep" }
+)
 vim.keymap.set("n", "<leader>fh", telescope_builtin.help_tags, { desc = "[S]earch [H]elp" })

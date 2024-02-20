@@ -19,6 +19,12 @@ local plugins = {
     lazy = false,
   },
   {
+    "ThePrimeagen/harpoon",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -45,6 +51,12 @@ local plugins = {
           return vim.fn.executable("make") == 1
         end,
       },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+      },
     },
   },
   {
@@ -58,10 +70,11 @@ local plugins = {
         "gofmt",
         "goimports_reviser",
         "golangci_lint",
-        "eslint_d",
         "spell",
         "mypy",
         "ruff",
+        "phpactor",
+        "prettier",
       },
     },
   },
@@ -87,6 +100,9 @@ local plugins = {
   {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate", -- this will ensure that your parsers are always up to date
+  },
+  {
+    "nvim-treesitter/playground",
   },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
@@ -228,6 +244,9 @@ local plugins = {
       -- Your DBUI configuration
       vim.g.db_ui_use_nerd_fonts = 1
     end,
+    config = function()
+      require("dbui").setup()
+    end,
   },
   {
     "folke/noice.nvim",
@@ -248,15 +267,12 @@ local plugins = {
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("todo-comments").setup()
+    end,
   },
   {
     "joerdav/templ.vim",
-  },
-  {
-    "ThePrimeagen/harpoon",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
   },
   {
     "AlexvZyl/nordic.nvim",
@@ -264,7 +280,93 @@ local plugins = {
     priority = 1000,
     config = function()
       require("nordic").load()
+
+      require("nordic").setup({
+        noice = {
+          style = "flat",
+        },
+        override = {
+          Visual = { bg = "#434C5E" },
+          PmenuSel = { bg = "#434C5E" },
+        },
+      })
+
       vim.cmd.colorscheme(_G.theme)
+    end,
+  },
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    opts = {},
+  },
+  {
+    "Wansmer/treesj",
+    keys = { "<space>m", "<space>j", "<space>s" },
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    opts = {},
+  },
+  {
+    "nvim-tree/nvim-tree.lua",
+    version = "*",
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup({
+        filters = { dotfiles = false, custom = { "^.git$", "^.idea$", "^.vscode$" } },
+      })
+    end,
+  },
+  {
+    "windwp/nvim-ts-autotag",
+  },
+  {
+    "karb94/neoscroll.nvim",
+    config = function()
+      require("neoscroll").setup({})
+    end,
+  },
+  {
+    "czheo/mojo.vim",
+    ft = { "mojo" },
+    init = function()
+      vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+        pattern = { "*.🔥" },
+        callback = function()
+          if vim.bo.filetype ~= "mojo" then
+            vim.bo.filetype = "mojo"
+          end
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "mojo",
+        callback = function()
+          local modular = vim.env.MODULAR_HOME
+          local lsp_cmd = modular .. "/pkg/packages.modular.com_mojo/bin/mojo-lsp-server"
+
+          vim.bo.expandtab = true
+          vim.bo.shiftwidth = 4
+          vim.bo.softtabstop = 4
+
+          vim.lsp.start({
+            name = "mojo",
+            cmd = { lsp_cmd },
+          })
+        end,
+      })
     end,
   },
 }

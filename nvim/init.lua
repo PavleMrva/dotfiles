@@ -3,7 +3,12 @@ _G.theme = "nordic"
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "U", "<C-r>", { noremap = true })
 
 require("plugins.init")
 
