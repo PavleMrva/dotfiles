@@ -19,7 +19,3 @@ end)
 vim.keymap.set("n", "<leader>xl", function()
   trouble.open("loclist")
 end)
-
-vim.keymap.set("n", "gR", function()
-  trouble.open("lsp_references")
-end)

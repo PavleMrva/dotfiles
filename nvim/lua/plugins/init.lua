@@ -37,6 +37,7 @@ local plugins = {
 
       -- Additional lua configuration, makes nvim stuff amazing!
       "folke/neodev.nvim",
+      "nvim-telescope/telescope-ui-select.nvim",
     },
   },
   {
@@ -138,8 +139,16 @@ local plugins = {
     "mfussenegger/nvim-dap",
   },
   {
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup({
+        library = { plugins = { "nvim-dap-ui" }, types = true },
+      })
+    end,
+  },
+  {
     "rcarriga/nvim-dap-ui",
-    dependencies = { "mfussenegger/nvim-dap" },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
   },
   {
     "leoluz/nvim-dap-go",
@@ -164,7 +173,8 @@ local plugins = {
       {
         -- snippet plugin
         "L3MON4D3/LuaSnip",
-        dependencies = "rafamadriz/friendly-snippets",
+        -- dependencies = "rafamadriz/friendly-snippets",
+        version = "v2.*",
         run = "make install_jsregexp",
       },
       {
@@ -199,21 +209,13 @@ local plugins = {
   },
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("lualine").setup({
-        options = {
-          theme = _G.theme,
-        },
-      })
+      require("lualine").setup({})
     end,
   },
   {
     "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
     opts = {},
   },
   {
@@ -250,7 +252,7 @@ local plugins = {
   },
   {
     "folke/noice.nvim",
-    event = "VeryLazy",
+    -- event = "VeryLazy",
     opts = {
       -- add any options here
     },
@@ -262,35 +264,19 @@ local plugins = {
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
-    config = function() end,
   },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("todo-comments").setup()
-    end,
   },
   {
     "joerdav/templ.vim",
   },
   {
-    "AlexvZyl/nordic.nvim",
-    lazy = false,
+    "catppuccin/nvim",
+    name = "catppuccin",
     priority = 1000,
-    config = function()
-      require("nordic").load()
-
-      require("nordic").setup({
-        noice = {
-          style = "flat",
-        },
-        override = {
-          Visual = { bg = "#434C5E" },
-          PmenuSel = { bg = "#434C5E" },
-        },
-      })
-
+    init = function()
       vim.cmd.colorscheme(_G.theme)
     end,
   },
@@ -308,7 +294,6 @@ local plugins = {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
-    opts = {},
   },
   {
     "Wansmer/treesj",
@@ -323,11 +308,6 @@ local plugins = {
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      require("nvim-tree").setup({
-        filters = { dotfiles = false, custom = { "^.git$", "^.idea$", "^.vscode$" } },
-      })
-    end,
   },
   {
     "windwp/nvim-ts-autotag",
@@ -368,6 +348,22 @@ local plugins = {
         end,
       })
     end,
+  },
+  { -- Collection of various small independent plugins/modules
+    "echasnovski/mini.nvim",
+    version = "*",
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- required
+      "sindrets/diffview.nvim", -- optional - Diff integration
+
+      -- Only one of these is needed, not both.
+      "nvim-telescope/telescope.nvim", -- optional
+      "ibhagwan/fzf-lua",           -- optional
+    },
+    config = true,
   },
 }
 

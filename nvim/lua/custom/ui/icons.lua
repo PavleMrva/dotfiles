@@ -60,8 +60,8 @@ M.devicons = {
   },
 
   dart = {
-    icon = '',
-    name = 'dart'
+    icon = "",
+    name = "dart",
   },
 
   deb = {
@@ -70,7 +70,7 @@ M.devicons = {
   },
 
   Dockerfile = {
-    icon = "",
+    icon = "",
     name = "Dockerfile",
   },
 

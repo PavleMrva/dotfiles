@@ -1,25 +1,17 @@
-_G.theme = "nordic"
+_G.theme = "catppuccin"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+vim.g.have_nerd_font = false
+
+vim.opt.spelllang = "en_us"
+vim.opt.spell = true
+
+vim.opt.conceallevel = 1
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "U", "<C-r>", { noremap = true })
-
-require("plugins.init")
-
-vim.g.go_def_mode = "guru"
-vim.g.go_addtags_transform = "snakecase"
-
--- Enable telescope theme
-vim.g.gruvbox_baby_telescope_theme = 1
-
--- Enable transparent mode
-vim.g.gruvbox_baby_transparent_mode = 1
 
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -63,12 +55,18 @@ vim.wo.signcolumn = "yes"
 
 -- Decrease update time
 vim.o.updatetime = 50
+vim.o.timeout = true
 vim.o.timeoutlen = 300
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
 vim.keymap.set("n", "<leader>p", '"_dP', { desc = "Paste without register" })
+
+require("plugins.init")
+
+vim.g.go_def_mode = "guru"
+vim.g.go_addtags_transform = "snakecase"
 
 require("custom.configs.lspconfig")
 

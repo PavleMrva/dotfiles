@@ -1,3 +1,5 @@
+# Set configuration directory
+export XDG_CONFIG_HOME="$HOME/.config"
 # Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -7,7 +9,7 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # ZSH Theme Configuration
-ZSH_THEME="robbyrussell"
+ZSH_THEME="jbergantine"
 
 # Oh-My-Zsh Plugins
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
@@ -41,6 +43,7 @@ export GOPRIVATE="bitbucket.org/autautdoo/*"
 export GOROOT="/usr/local/go"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
+export GOPROXY="https://proxy.golang.org"
 
 # Neovim and Mason
 export MASON_PATH="$HOME/.local/share/nvim/mason"
@@ -70,6 +73,5 @@ export PATH="/opt/homebrew/opt/php@7.4/sbin:$PATH"
 
 export MODULAR_HOME="$HOME/.modular"
 export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
-
 
 export MOJO_PYTHON_LIBRARY=/Users/Pavle/miniconda3/lib/libpython3.11.dylib

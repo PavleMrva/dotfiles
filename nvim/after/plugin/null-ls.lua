@@ -29,7 +29,7 @@ null_ls.setup({
           -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
           vim.lsp.buf.format({ async = false })
         end,
-      })
+    })
     end
   end,
 })
