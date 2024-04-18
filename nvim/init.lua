@@ -1,4 +1,4 @@
-_G.theme = "catppuccin"
+_G.theme = "gruvbox"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -18,6 +18,9 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true -- convert tabs to spaces
 vim.opt.softtabstop = 2
 vim.opt.scrolloff = 5
+
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -77,4 +80,3 @@ vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
 vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 
 vim.cmd([[let g:terraform_fmt_on_save=1]])
-vim.cmd([[let g:terraform_align=1]])

@@ -62,6 +62,9 @@ local plugins = {
   },
   {
     "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
     opts = {
       ensure_installed = {
         "stylua",
@@ -76,6 +79,7 @@ local plugins = {
         "ruff",
         "phpactor",
         "prettier",
+        "svelte-language-server",
       },
     },
   },
@@ -84,23 +88,8 @@ local plugins = {
     ft = "lua",
   },
   {
-    "sainnhe/gruvbox-material",
-  },
-  {
-    "jacoborus/tender.vim",
-  },
-  {
-    "luisiacc/gruvbox-baby",
-  },
-  {
-    "rebelot/kanagawa.nvim",
-  },
-  {
-    "ayu-theme/ayu-vim",
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
-    run = ":TSUpdate", -- this will ensure that your parsers are always up to date
+    build = ":TSUpdate", -- this will ensure that your parsers are always up to date
   },
   {
     "nvim-treesitter/playground",
@@ -111,15 +100,6 @@ local plugins = {
   },
   {
     "nvim-tree/nvim-web-devicons",
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    config = true,
-  },
-  {
-    "mg979/vim-visual-multi",
-    branch = "master",
   },
   {
     "lewis6991/gitsigns.nvim",
@@ -154,6 +134,7 @@ local plugins = {
     "leoluz/nvim-dap-go",
     ft = "go",
     dependencies = { "mfussenegger/nvim-dap" },
+    opts = {},
   },
   {
     "jose-elias-alvarez/null-ls.nvim",
@@ -250,21 +231,19 @@ local plugins = {
       require("dbui").setup()
     end,
   },
-  {
-    "folke/noice.nvim",
-    -- event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-    },
-  },
+  -- {
+  --   "folke/noice.nvim",
+  --   -- event = "VeryLazy",
+  --   opts = {},
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     "MunifTanjim/nui.nvim",
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     "rcarriga/nvim-notify",
+  --   },
+  -- },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -279,6 +258,19 @@ local plugins = {
     init = function()
       vim.cmd.colorscheme(_G.theme)
     end,
+    config = function()
+      require("catppuccin").setup({
+        transparent_background = true,
+      })
+    end,
+  },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = true,
+    opts = {
+      transparent_mode = true,
+    },
   },
   {
     "epwalsh/obsidian.nvim",
@@ -289,11 +281,6 @@ local plugins = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
     },
-  },
-  {
-    "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
   },
   {
     "Wansmer/treesj",
@@ -311,12 +298,6 @@ local plugins = {
   },
   {
     "windwp/nvim-ts-autotag",
-  },
-  {
-    "karb94/neoscroll.nvim",
-    config = function()
-      require("neoscroll").setup({})
-    end,
   },
   {
     "czheo/mojo.vim",
@@ -356,14 +337,25 @@ local plugins = {
   {
     "NeogitOrg/neogit",
     dependencies = {
-      "nvim-lua/plenary.nvim", -- required
-      "sindrets/diffview.nvim", -- optional - Diff integration
+      "nvim-lua/plenary.nvim",      -- required
+      "sindrets/diffview.nvim",     -- optional - Diff integration
 
-      -- Only one of these is needed, not both.
       "nvim-telescope/telescope.nvim", -- optional
-      "ibhagwan/fzf-lua",           -- optional
     },
     config = true,
+  },
+  {
+    "ThePrimeagen/vim-be-good",
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+  },
+  {
+    "mbbill/undotree",
+  },
+  {
+    "ThePrimeagen/git-worktree.nvim",
+    opts = {},
   },
 }
 

@@ -20,6 +20,7 @@ telescope.setup({
 -- Enable telescope extensions, if they are installed
 pcall(require("telescope").load_extension, "fzf")
 pcall(require("telescope").load_extension, "ui-select")
+pcall(require("telescope").load_extension, "git-worktree")
 
 local builtin = require("telescope.builtin")
 
@@ -56,3 +57,17 @@ end, { desc = "[S]earch [/] in Open Files" })
 vim.keymap.set("n", "<leader>sn", function()
   builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
+
+vim.keymap.set("n", "<leader>st", function()
+  telescope.extensions.git_worktree.git_worktrees()
+  -- <Enter> - switches to that worktree
+  -- <c-d> - deletes that worktree
+  -- <c-f> - toggles forcing of the next deletion
+end, { desc = "[S]earch Git Work[t]rees" })
+
+vim.keymap.set("n", "<leader>ct", function()
+  telescope.extensions.git_worktree.create_git_worktree()
+  -- <Enter> - switches to that worktree
+  -- <c-d> - deletes that worktree
+  -- <c-f> - toggles forcing of the next deletion
+end, { desc = "[C]reate Git Work[t]rees" })

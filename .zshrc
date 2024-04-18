@@ -33,6 +33,7 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/D
 # Kubernetes configurations
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export KUBE_EDITOR="nvim"
+export KUBECONFIG="$HOME/.kube/config:$HOME/.kube/prod-k8s-5star.ini:$HOME/.kube/cms-stage-config:$HOME/.kube/cms-prod-config:$HOME/.kube/go-test-aws-config"
 source <(kubectl completion zsh)
 
 # GVM (Go Version Manager)
@@ -75,3 +76,6 @@ export MODULAR_HOME="$HOME/.modular"
 export PATH="$MODULAR_HOME/pkg/packages.modular.com_mojo/bin:$PATH"
 
 export MOJO_PYTHON_LIBRARY=/Users/Pavle/miniconda3/lib/libpython3.11.dylib
+
+# use python 3.11 for gcloud
+export CLOUDSDK_PYTHON=/Library/Frameworks/Python.framework/Versions/3.11/bin/python3

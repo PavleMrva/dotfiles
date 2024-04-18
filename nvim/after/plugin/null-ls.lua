@@ -11,7 +11,9 @@ null_ls.setup({
     null_ls.builtins.formatting.gofmt,
     null_ls.builtins.formatting.goimports_reviser,
     null_ls.builtins.diagnostics.golangci_lint,
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettierd.with({
+      extra_filetypes = { "svelte" },
+    }),
     null_ls.builtins.completion.spell,
     null_ls.builtins.diagnostics.mypy,
     null_ls.builtins.formatting.ruff,
@@ -29,7 +31,7 @@ null_ls.setup({
           -- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
           vim.lsp.buf.format({ async = false })
         end,
-    })
+      })
     end
   end,
 })

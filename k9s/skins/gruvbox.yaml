@@ -1,0 +1,100 @@
+k9s:
+  body:
+    fgColor: "#ebdbb2" # Soft light (replaces light blue-gray)
+    bgColor: "#282828" # Dark gray (replaces dark blue)
+    logoColor: "#d3869b" # Pink (replaces purple)
+  prompt:
+    fgColor: "#ebdbb2"
+    bgColor: "#3c3836" # Darker gray
+    suggestColor: "#83a598" # Teal (replaces light blue)
+  help:
+    fgColor: "#ebdbb2"
+    bgColor: "#282828"
+    sectionColor: "#b8bb26" # Light green (replaces light green)
+    keyColor: "#83a598" # Teal
+    numKeyColor: "#fb4934" # Red (replaces pink)
+  frame:
+    title:
+      fgColor: "#8ec07c" # Aquamarine (replaces turquoise)
+      bgColor: "#282828"
+      highlightColor: "#d3869b" # Pink
+      counterColor: "#fabd2f" # Yellow (replaces light yellow)
+      filterColor: "#b8bb26" # Light green
+    border:
+      fgColor: "#d3869b" # Pink
+      focusColor: "#fe8019" # Orange (replaces blue)
+    menu:
+      fgColor: "#ebdbb2"
+      keyColor: "#83a598" # Teal
+      numKeyColor: "#fb4934" # Red
+    crumbs:
+      fgColor: "#282828"
+      bgColor: "#fb4934" # Red
+      activeColor: "#cc241d" # Dark red (replaces light pink)
+    status:
+      newColor: "#83a598" # Teal
+      modifyColor: "#fe8019" # Orange
+      addColor: "#b8bb26" # Light green
+      pendingColor: "#fabd2f" # Yellow
+      errorColor: "#fb4934" # Red
+      highlightColor: "#83a598" # Teal
+      killColor: "#d3869b" # Pink
+      completedColor: "#928374" # Gray (replaces gray-blue)
+  info:
+    fgColor: "#fabd2f" # Yellow
+    sectionColor: "#ebdbb2" # Soft light
+  views:
+    table:
+      fgColor: "#ebdbb2"
+      bgColor: "#282828"
+      cursorFgColor: "#3c3836" # Dark gray
+      cursorBgColor: "#504945" # Dark brown
+      markColor: "#d3869b" # Pink
+      header:
+        fgColor: "#fabd2f" # Yellow
+        bgColor: "#282828"
+        sorterColor: "#83a598" # Teal
+    xray:
+      fgColor: "#ebdbb2"
+      bgColor: "#282828"
+      cursorColor: "#504945" # Dark brown
+      cursorTextColor: "#282828"
+      graphicColor: "#d3869b" # Pink
+    charts:
+      bgColor: "#282828"
+      chartBgColor: "#282828"
+      dialBgColor: "#282828"
+      defaultDialColors:
+        - "#b8bb26" # Light green
+        - "#fb4934" # Red
+      defaultChartColors:
+        - "#b8bb26"
+        - "#fb4934"
+      resourceColors:
+        cpu:
+          - "#d3869b" # Pink
+          - "#83a598" # Teal
+        mem:
+          - "#fabd2f" # Yellow
+          - "#fabd2f" # Yellow
+    yaml:
+      keyColor: "#83a598" # Teal
+      valueColor: "#ebdbb2" # Soft light
+      colonColor: "#928374" # Gray
+    logs:
+      fgColor: "#ebdbb2"
+      bgColor: "#282828"
+      indicator:
+        fgColor: "#fe8019" # Orange
+        bgColor: "#282828"
+        toggleOnColor: "#b8bb26" # Light green
+        toggleOffColor: "#928374" # Gray
+  dialog:
+    fgColor: "#fabd2f" # Yellow
+    bgColor: "#1d2021" # Very dark gray
+    buttonFgColor: "#282828"
+    buttonBgColor: "#928374" # Gray
+    buttonFocusFgColor: "#282828"
+    buttonFocusBgColor: "#d3869b" # Pink
+    labelFgColor: "#d3869b" # Pink
+    fieldFgColor: "#ebdbb2" # Soft light
