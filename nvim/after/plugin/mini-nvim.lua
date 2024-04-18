@@ -15,33 +15,15 @@ require("mini.surround").setup()
 
 require("mini.splitjoin").setup()
 
-local header_art = [[
- ╭╮╭┬─╮╭─╮┬  ┬┬╭┬╮
- │││├┤ │ │╰┐┌╯││││
- ╯╰╯╰─╯╰─╯ ╰╯ ┴┴ ┴
-]]
+local statusline = require("mini.statusline")
 
-local starter = require("mini.starter")
+-- set use_icons to true if you have a Nerd Font
+statusline.setup({ use_icons = vim.g.have_nerd_font })
 
-starter.setup({
-  items = {
-    starter.sections.builtin_actions(),
-    starter.sections.telescope(),
-    starter.sections.recent_files(),
-  },
-  content_hooks = {
-    function(content)
-      local blank_content_line = { { type = "empty", string = "" } }
-      local section_coords = starter.content_coords(content, "section")
-      -- Insert backwards to not affect coordinates
-      for i = #section_coords, 1, -1 do
-        table.insert(content, section_coords[i].line + 1, blank_content_line)
-      end
-      return content
-    end,
-    starter.gen_hook.adding_bullet("» "),
-    starter.gen_hook.aligning("center", "center"),
-  },
-  header = header_art,
-  footer = "",
-})
+-- You can configure sections in the statusline by overriding their
+-- default behavior. For example, here we set the section for
+-- cursor location to LINE:COLUMN
+---@diagnostic disable-next-line: duplicate-set-field
+statusline.section_location = function()
+  return "%2l:%-2v"
+end

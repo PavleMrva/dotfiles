@@ -16,7 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   {
     "christoomey/vim-tmux-navigator",
-    lazy = false,
   },
   {
     "ThePrimeagen/harpoon",
@@ -189,13 +188,6 @@ local plugins = {
     "folke/trouble.nvim",
   },
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-    config = function()
-      require("lualine").setup({})
-    end,
-  },
-  {
     "folke/which-key.nvim",
     opts = {},
   },
@@ -207,6 +199,7 @@ local plugins = {
   },
   {
     "github/copilot.vim",
+    enabled = false,
   },
   {
     "tpope/vim-dadbod",
@@ -231,19 +224,6 @@ local plugins = {
       require("dbui").setup()
     end,
   },
-  -- {
-  --   "folke/noice.nvim",
-  --   -- event = "VeryLazy",
-  --   opts = {},
-  --   dependencies = {
-  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-  --     "MunifTanjim/nui.nvim",
-  --     -- OPTIONAL:
-  --     --   `nvim-notify` is only needed, if you want to use the notification view.
-  --     --   If not available, we use `mini` as the fallback
-  --     "rcarriga/nvim-notify",
-  --   },
-  -- },
   {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -291,7 +271,6 @@ local plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
-    lazy = false,
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },

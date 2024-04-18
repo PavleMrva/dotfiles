@@ -13,5 +13,12 @@ dap.listeners.before.event_exited.dapui_config = function()
   dapui.close()
 end
 
-vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, { desc = "Add breakpoint at line" })
+vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Add [b]reakpoint" })
+vim.keymap.set("n", "<leader>B", function()
+  dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+end, { desc = "Add [B]reakpoint with condition" })
+vim.keymap.set("n", "<leader>lp", function()
+  dap.set_breakpoint(nil, nil, vim.fn.input("Log point message: "))
+end, { desc = "Add [l]og [p]oint" })
+vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "DAP REPL" })
 vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP Continue" })
