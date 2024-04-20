@@ -79,3 +79,4 @@ export MOJO_PYTHON_LIBRARY=/Users/Pavle/miniconda3/lib/libpython3.11.dylib
 
 # use python 3.11 for gcloud
 export CLOUDSDK_PYTHON=/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
+export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"

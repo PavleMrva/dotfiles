@@ -1,6 +1,0 @@
-vim.keymap.set("n", "<leader>dt", function()
-  require("dap-go").debug_test()
-end, { desc = "Debug go test" })
-vim.keymap.set("n", "<leader>dl", function()
-  require("dap-go").debug_last()
-end, { desc = "Debug last go test" })

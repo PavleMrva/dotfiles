@@ -1,27 +1,6 @@
 -- Enable telescope fzf native, if installed
 -- pcall(require('telescope').load_extension, 'fzf')
 local telescope = require("telescope")
-
-telescope.load_extension("harpoon")
-telescope.load_extension("live_grep_args")
-telescope.setup({
-  defaults = {
-    file_ignore_patterns = {
-      "node_modules",
-    },
-  },
-  extensions = {
-    ["ui-select"] = {
-      require("telescope.themes").get_dropdown(),
-    },
-  },
-})
-
--- Enable telescope extensions, if they are installed
-pcall(require("telescope").load_extension, "fzf")
-pcall(require("telescope").load_extension, "ui-select")
-pcall(require("telescope").load_extension, "git-worktree")
-
 local builtin = require("telescope.builtin")
 
 vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
