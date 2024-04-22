@@ -1,4 +1,3 @@
-require("config.remaps.dap-gui")
 require("config.remaps.gitsigns")
 require("config.remaps.harpoon")
 require("config.remaps.luasnip")
