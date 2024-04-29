@@ -59,7 +59,8 @@ return {
 			},
 			window = {
 				completion = cmp.config.window.bordered({
-					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+					border = "rounded",
+					winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:Folded,Search:None",
 				}),
 				documentation = cmp.config.window.bordered(),
 			},

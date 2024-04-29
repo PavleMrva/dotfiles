@@ -1,4 +1,4 @@
-_G.theme = "gruvbox"
+_G.theme = "nordic"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -66,11 +66,11 @@ vim.opt.termguicolors = true
 vim.keymap.set("n", "<leader>p", '"_dP', { desc = "Paste without register" })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-  desc = "Highlight when yanking (copying) text",
-  group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
+	desc = "Highlight when yanking (copying) text",
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
+	callback = function()
+		vim.highlight.on_yank()
+	end,
 })
 
 require("config.lazy_init")

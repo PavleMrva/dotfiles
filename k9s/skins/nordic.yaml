@@ -1,0 +1,100 @@
+k9s:
+  body:
+    fgColor: "#ECEFF4"  # Light grey
+    bgColor: "#242933"  # Dark blue-grey
+    logoColor: "#88C0D0"  # Bright aqua
+  prompt:
+    fgColor: "#ECEFF4"
+    bgColor: "#3B4252"  # Medium dark blue
+    suggestColor: "#81A1C1"  # Soft blue
+  help:
+    fgColor: "#ECEFF4"
+    bgColor: "#242933"
+    sectionColor: "#8FBCBB"  # Soft teal
+    keyColor: "#81A1C1"  # Soft blue
+    numKeyColor: "#BF616A"  # Soft red
+  frame:
+    title:
+      fgColor: "#A3BE8C"  # Soft green
+      bgColor: "#242933"
+      highlightColor: "#88C0D0"  # Bright aqua
+      counterColor: "#EBCB8B"  # Soft yellow
+      filterColor: "#8FBCBB"  # Soft teal
+    border:
+      fgColor: "#88C0D0"  # Bright aqua
+      focusColor: "#81A1C1"  # Soft blue
+    menu:
+      fgColor: "#ECEFF4"
+      keyColor: "#81A1C1"  # Soft blue
+      numKeyColor: "#BF616A"  # Soft red
+    crumbs:
+      fgColor: "#242933"
+      bgColor: "#BF616A"  # Soft red
+      activeColor: "#D08770"  # Soft orange
+    status:
+      newColor: "#81A1C1"  # Soft blue
+      modifyColor: "#EBCB8B"  # Soft yellow
+      addColor: "#A3BE8C"  # Soft green
+      pendingColor: "#EBCB8B"  # Soft yellow
+      errorColor: "#BF616A"  # Soft red
+      highlightColor: "#81A1C1"  # Soft blue
+      killColor: "#88C0D0"  # Bright aqua
+      completedColor: "#4C566A"  # Medium grey
+  info:
+    fgColor: "#EBCB8B"  # Soft yellow
+    sectionColor: "#ECEFF4"  # Light grey
+  views:
+    table:
+      fgColor: "#ECEFF4"
+      bgColor: "#242933"
+      cursorFgColor: "#3B4252"  # Medium dark blue
+      cursorBgColor: "#4C566A"  # Medium grey
+      markColor: "#88C0D0"  # Bright aqua
+      header:
+        fgColor: "#EBCB8B"  # Soft yellow
+        bgColor: "#242933"
+        sorterColor: "#81A1C1"  # Soft blue
+    xray:
+      fgColor: "#ECEFF4"
+      bgColor: "#242933"
+      cursorColor: "#4C566A"  # Medium grey
+      cursorTextColor: "#242933"
+      graphicColor: "#88C0D0"  # Bright aqua
+    charts:
+      bgColor: "#242933"
+      chartBgColor: "#242933"
+      dialBgColor: "#242933"
+      defaultDialColors:
+        - "#A3BE8C"  # Soft green
+        - "#BF616A"  # Soft red
+      defaultChartColors:
+        - "#A3BE8C"
+        - "#BF616A"
+      resourceColors:
+        cpu:
+          - "#88C0D0"  # Bright aqua
+          - "#81A1C1"  # Soft blue
+        mem:
+          - "#EBCB8B"  # Soft yellow
+          - "#EBCB8B"  # Soft yellow
+    yaml:
+      keyColor: "#81A1C1"  # Soft blue
+      valueColor: "#ECEFF4"  # Light grey
+      colonColor: "#4C566A"  # Medium grey
+    logs:
+      fgColor: "#ECEFF4"
+      bgColor: "#242933"
+      indicator:
+        fgColor: "#EBCB8B"  # Soft yellow
+        bgColor: "#242933"
+        toggleOnColor: "#A3BE8C"  # Soft green
+        toggleOffColor: "#4C566A"  # Medium grey
+  dialog:
+    fgColor: "#EBCB8B"  # Soft yellow
+    bgColor: "#3B4252"  # Medium dark blue
+    buttonFgColor: "#242933"
+    buttonBgColor: "#4C566A"  # Medium grey
+    buttonFocusFgColor: "#242933"
+    buttonFocusBgColor: "#88C0D0"  # Bright aqua
+    labelFgColor: "#88C0D0"  # Bright aqua
+    fieldFgColor: "#ECEFF4"  # Light grey
