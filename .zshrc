@@ -80,3 +80,14 @@ export MOJO_PYTHON_LIBRARY=/Users/Pavle/miniconda3/lib/libpython3.11.dylib
 # use python 3.11 for gcloud
 export CLOUDSDK_PYTHON=/Library/Frameworks/Python.framework/Versions/3.11/bin/python3
 export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+
+# fuzzy find commonly used projects from different contexts
+alias fzfi="cd ~/igp-projects/\$(ls ~/igp-projects | fzf) && nvim"
+alias fzfl="cd ~/logic/\$(ls ~/logic | fzf) && nvim"
+alias fzfs="cd ~/samepay-projects/\$(ls ~/samepay-projects | fzf) && nvim"
+
+# FZF
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export FZF_COMPLETION_TRIGGER='~~'
