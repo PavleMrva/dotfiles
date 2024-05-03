@@ -8,11 +8,27 @@ fi
 # Path to your oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 
+bindkey -v
+
 # ZSH Theme Configuration
 ZSH_THEME="jbergantine"
 
 # Oh-My-Zsh Plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+  zsh-vi-mode
+)
+
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+
+# use the vi navigation keys in menu completion
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,6 +101,7 @@ export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
 alias fzfi="cd ~/igp-projects/\$(ls ~/igp-projects | fzf) && nvim"
 alias fzfl="cd ~/logic/\$(ls ~/logic | fzf) && nvim"
 alias fzfs="cd ~/samepay-projects/\$(ls ~/samepay-projects | fzf) && nvim"
+alias fzfr="cd ~/\$(ls ~ | fzf)"
 
 # FZF
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
