@@ -103,8 +103,9 @@ alias fzfl="cd ~/logic/\$(ls ~/logic | fzf) && nvim"
 alias fzfs="cd ~/samepay-projects/\$(ls ~/samepay-projects | fzf) && nvim"
 alias fzfr="cd ~/\$(ls ~ | fzf)"
 
-# FZF
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export FZF_COMPLETION_TRIGGER='~~'
+# export FZF_COMPLETION_TRIGGER='**'
+
+# Append a command directly
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
