@@ -23,8 +23,8 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 
 -- Set highlight on search
-vim.opt.hlsearch = true
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+-- vim.opt.hlsearch = true
+-- vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Make line numbers default
 vim.wo.number = true
