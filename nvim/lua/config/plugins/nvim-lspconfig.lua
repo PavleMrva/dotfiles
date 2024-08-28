@@ -4,6 +4,7 @@ return {
 		-- Automatically install LSPs to stdpath for neovim
 		{ "williamboman/mason.nvim", config = true },
 		"williamboman/mason-lspconfig.nvim",
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		-- Useful status updates for LSP
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -93,6 +94,14 @@ return {
 		capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 		local lspconfig = require("lspconfig")
 
+		-- Custom on_attach functions
+		-- local eslint_on_attach = function(client, bufnr)
+		-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+		-- 		buffer = bufnr,
+		-- 		command = "EslintFixAll",
+		-- 	})
+		-- end
+
 		-- Enable the following language servers
 		--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 		--
@@ -102,7 +111,6 @@ return {
 		--  If you want to override the default filetypes that your language server will attach to you can
 		--  define the property 'filetypes' to the map in question.
 		local servers = {
-
 			-- LSPs
 			templ = {
 				filetypes = { "templ" },
@@ -113,6 +121,9 @@ return {
 					return vim.loop.cwd()
 				end,
 			},
+			bufls = {
+				filetypes = { "proto" },
+			},
 			-- clangd = {},
 			gopls = {
 				gopls = {
@@ -122,6 +133,14 @@ return {
 						unusedparams = true,
 					},
 					staticcheck = true,
+					hints = {
+						compositeLiteralFields = true,
+						compositeLiteralTypes = true,
+						constantValues = true,
+						functionTypeParameters = true,
+						parameterNames = true,
+						rangeVariableTypes = true,
+					},
 				},
 				filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			},
@@ -138,11 +157,10 @@ return {
 				filetypes = { "zig" },
 			},
 			-- rust_analyzer = {},
-			tsserver = {
-				completions = {
-					completeFunctionCalls = true,
-				},
+			tailwindcss = {},
+			eslint = {
 				filetypes = {
+					"javascript.mjs",
 					"javascript",
 					"javascriptreact",
 					"javascript.jsx",
@@ -150,6 +168,82 @@ return {
 					"typescriptreact",
 					"typescript.tsx",
 				},
+			},
+			vtsls = {
+				filetypes = {
+					"javascript.mjs",
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
+				settings = {
+					complete_function_calls = true,
+					vtsls = {
+						enableMoveToFileCodeAction = true,
+						autoUseWorkspaceTsdk = true,
+						experimental = {
+							completion = {
+								enableServerSideFuzzyMatch = true,
+							},
+						},
+					},
+					typescript = {
+						updateImportsOnFileMove = { enabled = "always" },
+						suggest = {
+							completeFunctionCalls = true,
+						},
+						inlayHints = {
+							enumMemberValues = { enabled = true },
+							functionLikeReturnTypes = { enabled = true },
+							parameterNames = { enabled = "literals" },
+							parameterTypes = { enabled = true },
+							propertyDeclarationTypes = { enabled = true },
+							variableTypes = { enabled = false },
+						},
+					},
+				},
+			},
+			tsserver = {
+				enabled = false,
+				-- completions = {
+				-- 	completeFunctionCalls = true,
+				-- },
+				-- filetypes = {
+				-- 	"javascript.mjs",
+				-- 	"javascript",
+				-- 	"javascriptreact",
+				-- 	"javascript.jsx",
+				-- 	"typescript",
+				-- 	"typescriptreact",
+				-- 	"typescript.tsx",
+				-- },
+				-- typescript = {
+				-- 	inlayHints = {
+				-- 		includeInlayParameterNameHints = "all",
+				-- 		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+				-- 		includeInlayFunctionParameterTypeHints = true,
+				-- 		includeInlayVariableTypeHints = true,
+				-- 		includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+				-- 		includeInlayPropertyDeclarationTypeHints = true,
+				-- 		includeInlayFunctionLikeReturnTypeHints = true,
+				-- 		includeInlayEnumMemberValueHints = true,
+				-- 	},
+				-- },
+				-- javascript = {
+				-- 	inlayHints = {
+				-- 		includeInlayParameterNameHints = "all",
+				-- 		includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+				-- 		includeInlayFunctionParameterTypeHints = true,
+				-- 		includeInlayVariableTypeHints = true,
+				-- 		includeInlayVariableTypeHintsWhenTypeMatchesName = false,
+				-- 		includeInlayPropertyDeclarationTypeHints = true,
+				-- 		includeInlayFunctionLikeReturnTypeHints = true,
+				-- 		includeInlayEnumMemberValueHints = true,
+				-- 	},
+				-- },
 			},
 			html = { filetypes = { "html", "twig", "hbs" } },
 
@@ -175,6 +269,14 @@ return {
 					telemetry = {
 						enable = false,
 					},
+					hint = {
+						enable = true,
+						arrayIndex = "Enable", -- Show virtual text hints for array indexes
+						setType = true, -- Show virtual text hints for implicit set types
+						paramName = "All", -- Show virtual text hints for function parameters
+						paramType = true, -- Show virtual text hints for parameter types
+						semicolon = "SameLine", -- Show virtual text hints for semicolons
+					},
 				},
 				filetypes = { "lua" },
 			},
@@ -184,33 +286,67 @@ return {
 			},
 		}
 
-		require("neodev").setup()
-
-		-- Ensure the servers above are installed
-		local mason_lspconfig = require("mason-lspconfig")
-
-		mason_lspconfig.setup({
-			ensure_installed = vim.tbl_keys(servers),
+		require("mason").setup({})
+		require("mason-tool-installer").setup({
+			ensure_installed = {
+				"black",
+				"bufls",
+				"docker_compose_language_service",
+				"dockerls",
+				"eslint-lsp",
+				"gofumpt",
+				"goimports-reviser",
+				"golangci-lint",
+				"js-debug-adapter",
+				"lua-language-server",
+				"mypy",
+				"phpactor",
+				"prettier",
+				"prisma-language-server",
+				"ruff",
+				"spectral-language-server",
+				"sqlls",
+				"stylelint_lsp",
+				"stylua",
+				"svelte",
+				"tailwindcss-language-server",
+				"vtsls",
+			},
 		})
+		require("mason-lspconfig").setup({
+			handlers = {
+				function(server_name)
+					local server_config = servers[server_name] or {}
 
-		mason_lspconfig.setup_handlers({
-			function(server_name)
-				lspconfig[server_name].setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-					settings = servers[server_name],
-					filetypes = (servers[server_name] or {}).filetypes,
-					flags = {
-						debounce_text_changes = 150,
-					},
-				})
-			end,
+					if server_config.enabled == nil then
+						server_config.enabled = true
+					end
+
+					local lsp_config = {
+						capabilities = capabilities,
+						on_attach = on_attach,
+						enabled = server_config.enabled,
+						settings = server_config,
+						filetypes = server_config.filetypes,
+						flags = {
+							debounce_text_changes = 150,
+						},
+					}
+
+					-- if server_name == "eslint" then
+					-- 	lsp_config.on_attach = eslint_on_attach
+					-- end
+
+					lspconfig[server_name].setup(lsp_config)
+				end,
+			},
 		})
 
 		-- additional filetypes
 		vim.filetype.add({
 			extension = {
 				templ = "templ",
+				mdx = "mdx",
 			},
 		})
 

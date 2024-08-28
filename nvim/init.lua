@@ -24,7 +24,7 @@ vim.g.netrw_banner = 0
 
 -- Set highlight on search
 -- vim.opt.hlsearch = true
--- vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Make line numbers default
 vim.wo.number = true
@@ -75,14 +75,41 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 require("config.lazy_init")
 
+vim.lsp.inlay_hint.enable()
+vim.keymap.set("n", "<leader>i", function()
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+end, {
+	desc = "Toggle [I]nlay hints",
+})
+
 vim.cmd.colorscheme(_G.theme)
+
+vim.wo.foldmethod = "expr"
+vim.wo.foldexpr = "nvim_treesitter#foldexpr()"
+
+vim.wo.foldtext = ""
+vim.wo.foldlevel = 99
+-- vim.wo.foldlevelstart = 1
+-- vim.wo.foldnestmax = 4
 
 require("config.remaps")
 
+-- vim.treesitter.query.set(
+-- 	"typescript",
+-- 	"injections",
+-- 	[[
+--   (call_expression
+--     function: (member_expression
+--       object: ((identifier) @_obj (#eq? @_obj "Prisma"))
+--       property: ((property_identifier) @_prop (#eq? @_prop "sql")))
+--     arguments: (template_string
+--       (string_fragment) @injection.content)
+--     (#set! injection.language "sql"))
+-- ]]
+-- )
+
 vim.g.go_def_mode = "guru"
 vim.g.go_addtags_transform = "snakecase"
-
--- require("custom.configs.lspconfig")
 
 vim.cmd([[silent! autocmd! filetypedetect BufRead,BufNewFile *.tf]])
 vim.cmd([[autocmd BufRead,BufNewFile *.hcl set filetype=hcl]])
@@ -91,3 +118,33 @@ vim.cmd([[autocmd BufRead,BufNewFile *.tf,*.tfvars set filetype=terraform]])
 vim.cmd([[autocmd BufRead,BufNewFile *.tfstate,*.tfstate.backup set filetype=json]])
 
 vim.cmd([[let g:terraform_fmt_on_save=1]])
+
+-- sops
+function TmuxCommand(command)
+	local handle = io.popen("tmux " .. command)
+
+	if handle == nil then
+		error("[Error] tmux command error")
+		return
+	end
+
+	local result = handle:read("*a")
+	handle:close()
+	return result
+end
+
+-- open sops in new tmux pane
+vim.api.nvim_create_user_command("Sops", function()
+	local file = vim.fn.expand("%:p")
+	vim.cmd("write") -- Save the current buffer
+	TmuxCommand("split-window -h")
+	TmuxCommand('send-keys "sops ' .. vim.fn.shellescape(file) .. '; exit" C-m')
+end, {})
+
+vim.api.nvim_create_user_command("JqFormat", "!%jq .", {})
+
+-- image preview
+-- vim.api.nvim_create_user_command("ImagePreview", function()
+-- 	local cmd = string.format("qlmanage %", vim.fn.tempname())
+-- 	vim.system({ "" })
+-- end, {})

@@ -1,7 +1,18 @@
 [user]
 	email = pavle.mrvaljevic@igamingplatform.com
 	name = Pavle
+	signingKey = 
 [credential]
 	helper = osxkeychain
 [url "git@bitbucket.org:autautdoo"]
 	insteadOf = https://bitbucket.org/autautdoo
+[gpg]
+	format = openpgp
+	program = gpg
+[commit]
+	gpgSign = false
+[tag]
+	forceSignAnnotated = false
+[gpg "ssh"]
+	program = ssh-keygen
+	allowedSignersFile = 

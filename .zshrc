@@ -13,6 +13,16 @@ bindkey -v
 # ZSH Theme Configuration
 ZSH_THEME="jbergantine"
 
+export EDITOR="nvim"
+
+# Start ssh-agent if not already running
+if [ -z "$SSH_AUTH_SOCK" ] ; then
+  eval "$(ssh-agent -s)"
+fi
+
+# Add all identities
+ssh-add -A 2>/dev/null
+
 # Oh-My-Zsh Plugins
 plugins=(
   git
@@ -49,7 +59,7 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/D
 # Kubernetes configurations
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export KUBE_EDITOR="nvim"
-export KUBECONFIG="$HOME/.kube/config:$HOME/.kube/prod-k8s-5star.ini:$HOME/.kube/cms-stage-config:$HOME/.kube/cms-prod-config:$HOME/.kube/go-test-aws-config"
+export KUBECONFIG="export KUBECONFIG=$(echo ~/.kube/* | tr ' ' ':')"
 source <(kubectl completion zsh)
 
 # GVM (Go Version Manager)

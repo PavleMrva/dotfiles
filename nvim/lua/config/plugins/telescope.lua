@@ -23,7 +23,9 @@ return {
 	config = function()
 		-- Enable telescope fzf native, if installed
 		local telescope = require("telescope")
+		local actions = require("telescope.actions.mt")
 		local project_actions = require("telescope._extensions.project.actions")
+		local lga_actions = require("telescope-live-grep-args.actions")
 
 		telescope.load_extension("harpoon")
 		telescope.load_extension("live_grep_args")
@@ -31,11 +33,52 @@ return {
 			defaults = {
 				file_ignore_patterns = {
 					"node_modules",
+					"build/",
+					"dist",
+					"package.lock",
+					".git",
+					".idea",
+					".venv",
+				},
+			},
+			pickers = {
+				live_grep = {
+					file_ignore_patterns = {
+						"node_modules",
+						"build/",
+						"dist",
+						"package.lock",
+						".git",
+						".idea",
+						".venv",
+					},
+				},
+				find_files = {
+					find_command = {
+						"fd",
+						"--hidden",
+					},
 				},
 			},
 			extensions = {
 				["ui-select"] = {
 					require("telescope.themes").get_dropdown(),
+				},
+				live_grep_args = {
+					auto_quoting = true, -- enable/disable auto-quoting
+					-- define mappings, e.g.
+					mappings = { -- extend mappings
+						i = {
+							["<C-k>"] = lga_actions.quote_prompt(),
+							["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+							-- freeze the current list and start a fuzzy search in the frozen list
+							["<C-space>"] = actions.to_fuzzy_refine,
+						},
+					},
+					-- ... also accepts theme settings, for example:
+					-- theme = "dropdown", -- use dropdown theme
+					-- theme = { }, -- use own theme spec
+					-- layout_config = { mirror=true }, -- mirror preview pane
 				},
 				project = {
 					base_dirs = {

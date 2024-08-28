@@ -1,7 +1,7 @@
 k9s:
   body:
     fgColor: "#ECEFF4"  # Light grey
-    bgColor: "#242933"  # Dark blue-grey
+    bgColor: default  
     logoColor: "#88C0D0"  # Bright aqua
   prompt:
     fgColor: "#ECEFF4"
@@ -9,14 +9,14 @@ k9s:
     suggestColor: "#81A1C1"  # Soft blue
   help:
     fgColor: "#ECEFF4"
-    bgColor: "#242933"
+    bgColor: default
     sectionColor: "#8FBCBB"  # Soft teal
     keyColor: "#81A1C1"  # Soft blue
     numKeyColor: "#BF616A"  # Soft red
   frame:
     title:
       fgColor: "#A3BE8C"  # Soft green
-      bgColor: "#242933"
+      bgColor: default
       highlightColor: "#88C0D0"  # Bright aqua
       counterColor: "#EBCB8B"  # Soft yellow
       filterColor: "#8FBCBB"  # Soft teal
@@ -28,7 +28,7 @@ k9s:
       keyColor: "#81A1C1"  # Soft blue
       numKeyColor: "#BF616A"  # Soft red
     crumbs:
-      fgColor: "#242933"
+      fgColor: default
       bgColor: "#BF616A"  # Soft red
       activeColor: "#D08770"  # Soft orange
     status:
@@ -46,24 +46,24 @@ k9s:
   views:
     table:
       fgColor: "#ECEFF4"
-      bgColor: "#242933"
+      bgColor: default
       cursorFgColor: "#3B4252"  # Medium dark blue
       cursorBgColor: "#4C566A"  # Medium grey
       markColor: "#88C0D0"  # Bright aqua
       header:
         fgColor: "#EBCB8B"  # Soft yellow
-        bgColor: "#242933"
+        bgColor: default
         sorterColor: "#81A1C1"  # Soft blue
     xray:
       fgColor: "#ECEFF4"
-      bgColor: "#242933"
+      bgColor: default
       cursorColor: "#4C566A"  # Medium grey
-      cursorTextColor: "#242933"
+      cursorTextColor: default
       graphicColor: "#88C0D0"  # Bright aqua
     charts:
-      bgColor: "#242933"
-      chartBgColor: "#242933"
-      dialBgColor: "#242933"
+      bgColor: default
+      chartBgColor: default
+      dialBgColor: default
       defaultDialColors:
         - "#A3BE8C"  # Soft green
         - "#BF616A"  # Soft red
@@ -83,18 +83,18 @@ k9s:
       colonColor: "#4C566A"  # Medium grey
     logs:
       fgColor: "#ECEFF4"
-      bgColor: "#242933"
+      bgColor: default
       indicator:
         fgColor: "#EBCB8B"  # Soft yellow
-        bgColor: "#242933"
+        bgColor: default
         toggleOnColor: "#A3BE8C"  # Soft green
         toggleOffColor: "#4C566A"  # Medium grey
   dialog:
     fgColor: "#EBCB8B"  # Soft yellow
     bgColor: "#3B4252"  # Medium dark blue
-    buttonFgColor: "#242933"
+    buttonFgColor: default
     buttonBgColor: "#4C566A"  # Medium grey
-    buttonFocusFgColor: "#242933"
+    buttonFocusFgColor: default
     buttonFocusBgColor: "#88C0D0"  # Bright aqua
     labelFgColor: "#88C0D0"  # Bright aqua
     fieldFgColor: "#ECEFF4"  # Light grey

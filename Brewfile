@@ -9,6 +9,7 @@ tap "koekeishiya/formulae"
 tap "kyoh86/tap"
 tap "mongodb/brew"
 tap "ngrok/ngrok"
+brew "fzf"
 # Cryptography and SSL/TLS Toolkit
 brew "openssl@1.1"
 # Interpreted, interactive, object-oriented programming language
@@ -102,9 +103,7 @@ brew "goreleaser/tap/goreleaser"
 # Right imports sorting & code formatting tool
 brew "incu6us/tap/goimports-reviser"
 # Simple hotkey-daemon for macOS.
-brew "koekeishiya/formulae/skhd"
 # A tiling window manager for macOS based on binary space partitioning.
-brew "koekeishiya/formulae/yabai"
 # Rich-Go will enrich `go test` outputs with text decorations
 brew "kyoh86/tap/richgo"
 # High-performance, schema-free, document-oriented database
