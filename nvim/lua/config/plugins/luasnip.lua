@@ -1,15 +1,15 @@
 return {
   "L3MON4D3/LuaSnip",
+  version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+  build = "make install_jsregexp",
+  dependencies = { "rafamadriz/friendly-snippets" },
   config = function()
     local ls = require("luasnip")
-
-    ls.config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
-    -- NOTE: This is a workaround for the issue with the `luasnip` plugin
-    -- TODO: Remove this once the issue is fixed
 
     -- vscode format
     require("luasnip.loaders.from_vscode").lazy_load()
     -- require("luasnip.loaders.from_vscode").lazy_load({ paths = vim.g.vscode_snippets_path or "" })
+    -- require("luasnip-snippets").load_snippets()
 
     -- snipmate format
     require("luasnip.loaders.from_snipmate").load()

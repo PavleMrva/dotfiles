@@ -59,7 +59,7 @@ if [ -f "$HOME/Downloads/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/D
 # Kubernetes configurations
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 export KUBE_EDITOR="nvim"
-export KUBECONFIG="export KUBECONFIG=$(echo ~/.kube/* | tr ' ' ':')"
+export KUBECONFIG=$(ls -p /Users/Pavle/.kube | grep -v / | xargs -I {} echo "/Users/Pavle/.kube/{}" | tr '\n' ':' | sed 's/:$//')
 source <(kubectl completion zsh)
 
 # GVM (Go Version Manager)
@@ -119,3 +119,14 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow'
 
 # Append a command directly
 zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+
+# custom functions
+awscfg() {
+  PROFILE=$(cat ~/.aws/credentials | grep "\[.*\]" | grep -o '[^][]*' | fzf)
+  export AWS_DEFAULT_PROFILE="$PROFILE"
+}
+
+ktx() {
+  CTX=$(k config get-contexts | sed '1d' | awk '{print $2}' | fzf)
+  k config use-context $CTX
+}

@@ -138,7 +138,7 @@ vim.api.nvim_create_user_command("Sops", function()
 	local file = vim.fn.expand("%:p")
 	vim.cmd("write") -- Save the current buffer
 	TmuxCommand("split-window -h")
-	TmuxCommand('send-keys "sops ' .. vim.fn.shellescape(file) .. '; exit" C-m')
+	TmuxCommand('send-keys "awscfg && sops ' .. vim.fn.shellescape(file) .. '; exit" C-m')
 end, {})
 
 vim.api.nvim_create_user_command("JqFormat", "!%jq .", {})

@@ -26,12 +26,14 @@ return {
 				on_palette = function(palette)
 					return palette
 				end,
-				transparent_bg = true,
+				transparent = {
+					-- Enable transparent background.
+					bg = true,
+					-- Enable transparent background for floating windows.
+					float = true,
+				},
 				cursorline = {
 					blend = 0.1,
-				},
-				override = {
-					Visual = { bg = "#000000" },
 				},
 			})
 		end,
